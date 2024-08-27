@@ -10,32 +10,43 @@ import {
   siteTitle
 } from "./layout.module.css"
 
-// import Header from "./header"
-
 const Layout = ({ pageTitle, children }) => {
   const { title } = useSiteMetadata()
+
+  const navItems = [
+    {
+      text: 'Home',
+      url: '/'
+    },
+    {
+      text: 'About',
+      url: '/about'
+    },
+    {
+      text: 'Blog',
+      url: '/blog'
+    }
+  ]
 
   return (
     <div className={container}>
       <header className={siteTitle}>{title}</header>
       <nav>
         <ul className={navLinks}>
-          <li className={navLinkItem}>
-            <Link
-              className={navLinkText}
-              to="/"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={navLinkText}
-              to="/about"
-            >
-              About
-            </Link>
-          </li>
+          {
+            navItems.map((item) => {
+              return (
+                <li className={navLinkItem}>
+                  <Link
+                    className={navLinkText}
+                    to={item.url}
+                  >
+                    {item.text}
+                  </Link>
+                </li>
+              )
+            })
+          }
         </ul>
       </nav>
       <main>
